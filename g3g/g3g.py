@@ -1,9 +1,10 @@
 import numpy as np
+import json
 from lib import word_lists, clues
 from tqdm import tqdm
 
 
-epsilon = 28.0
+epsilon = 12.0
 ws1 = "salet"
 
 print("Assessing epsilon =", epsilon)
@@ -66,16 +67,37 @@ def highest_entropy_guesses(w1, c1, N=40):
 
 if __name__ == "__main__":
 
-    all_w3 = set()
+    # Evaluate heuristics for third guess
 
-    for c1 in tqdm(range(3**5)):
+    with open("d95/d95_third_guess_memo.json") as f:
+        third_guess_memo = json.load(f)
 
-        for w2 in highest_entropy_guesses(w1, c1, N=40):
+    for path, bw3 in third_guess_memo.items():
+        w1, c1, w2, c2 = path.split(" ")
 
-            for c2 in tqdm(range(3**5)):
-                
-                w3 = best_third_guess(w1, c1, w2, c2)
+        w1 = int(w1)
+        c1 = int(c1)
+        w2 = int(w2)
+        c2 = int(c2)
 
-                if w3 not in all_w3:
-                    all_w3.add(w3)
-                    print(len(all_w3))
+        ps1 = pd[c1][cwa[w1]]
+        ps2 = pd[c2][cwa[w2]]
+        ps = ps2[:, np.newaxis]
+
+        # answers that make up 90% of outcomes
+        ps = np.sort(ps)
+        sps = np.cumsum(ps)
+
+        sps = sps / sps[-1]
+
+        # plot sps, one bar per value
+        import matplotlib.pyplot as plt
+        plt.figure(figsize=(10,6))
+        plt.bar(range(len(sps)), sps)
+        plt.xlabel('Answer Index')
+        plt.ylabel('Cumulative Probability')
+        plt.title('Cumulative Distribution of Answer Probabilities')
+        plt.grid(True)
+        plt.show()
+
+

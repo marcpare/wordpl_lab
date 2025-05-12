@@ -1,9 +1,7 @@
 
 
-Make a list of good third guess words
 
+Cumulative probability distribution after two guesses is almost linear still, with only about 500 / 2500 words
+able to be pruned into top 90% of outcomes.
 
-For every w1, c1, w2, c2
-    Compute best third guess word
-
-
+So, not much to gain from pruning the third guess...

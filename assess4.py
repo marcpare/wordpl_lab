@@ -1,4 +1,5 @@
 import random
+import os
 import json
 import math
 import numpy as np
@@ -7,18 +8,21 @@ from multiprocessing import Process, Queue
 from scipy.stats import beta
 from lib import word_lists, clues
 
-
-
 # epsilon = 12.35
 # ws1 = "trace"
 # strategy  = json.load(open("e4/e4.json", "r"))
 # strategy = [s[0] for s in strategy]
 # (0.491725768321513, (0.45808472610401146, 0.525403867261636))
 
-epsilon = 28.0
+# epsilon = 28.0
+# ws1 = "salet"
+# strategy  = json.load(open("d95/d95.json", "r"))
+# (3679, 0.9589562381081815, (0.9523138123743408, 0.9651262243210579))
+
+epsilon = 27.0
 ws1 = "salet"
 strategy  = json.load(open("d95/d95.json", "r"))
-# (1269, 0.9605988967691096, (0.9492307674308827, 0.970593603455126))
+(1370, 0.9554744525547445, (0.9439425366988602, 0.965748040607082))
 
 
 print("Assessing epsilon =", epsilon)
@@ -32,11 +36,17 @@ cwa = clues.cwa()
 #
 #############################################################################################################
 
-third_guess_memo = {}
+memo_path = "d95/d95_third_guess_memo.json"
+if not os.path.exists(memo_path):
+    with open(memo_path, "w") as f:
+        json.dump({}, f)
+third_guess_memo = json.load(open(memo_path, "r"))
 
 def best_third_guess(w1, c1, w2, c2):
 
-    memo_key = (w1, c1, w2, c2)
+    global third_guess_memo
+
+    memo_key = f"{w1} {c1} {w2} {c2}"
     if memo_key in third_guess_memo:
         return third_guess_memo[memo_key]
 
@@ -58,7 +68,13 @@ def best_third_guess(w1, c1, w2, c2):
             best_expected_wins = expected_wins
             best_w3 = w3
 
-    third_guess_memo[memo_key] = best_w3
+
+    with open(memo_path, "r") as f:
+        third_guess_memo = json.load(f)
+        third_guess_memo[memo_key] = best_w3
+    with open(memo_path, "w") as f:
+        json.dump(third_guess_memo, f)
+
     return best_w3
 
 #############################################################################################################
