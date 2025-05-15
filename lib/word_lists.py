@@ -1,3 +1,4 @@
+import random
 
 valid_words = open("data/valid.txt", "r").read().splitlines()
 answers = open("data/answers.txt", "r").read().splitlines()

@@ -19,10 +19,15 @@ from lib import word_lists, clues
 # strategy  = json.load(open("d95/d95.json", "r"))
 # (3679, 0.9589562381081815, (0.9523138123743408, 0.9651262243210579))
 
-epsilon = 27.0
+# epsilon = 27.0
+# ws1 = "salet"
+# strategy  = json.load(open("d95/d95.json", "r"))
+# (1370, 0.9554744525547445, (0.9439425366988602, 0.965748040607082))
+
+epsilon = 12.35
 ws1 = "salet"
 strategy  = json.load(open("d95/d95.json", "r"))
-(1370, 0.9554744525547445, (0.9439425366988602, 0.965748040607082))
+
 
 
 print("Assessing epsilon =", epsilon)
@@ -44,11 +49,11 @@ third_guess_memo = json.load(open(memo_path, "r"))
 
 def best_third_guess(w1, c1, w2, c2):
 
-    global third_guess_memo
+    # global third_guess_memo
 
-    memo_key = f"{w1} {c1} {w2} {c2}"
-    if memo_key in third_guess_memo:
-        return third_guess_memo[memo_key]
+    # memo_key = f"{w1} {c1} {w2} {c2}"
+    # if memo_key in third_guess_memo:
+    #     return third_guess_memo[memo_key]
 
     ps1 = pd[c1][cwa[w1]]
     ps2 = pd[c2][cwa[w2]]
@@ -68,12 +73,11 @@ def best_third_guess(w1, c1, w2, c2):
             best_expected_wins = expected_wins
             best_w3 = w3
 
-
-    with open(memo_path, "r") as f:
-        third_guess_memo = json.load(f)
-        third_guess_memo[memo_key] = best_w3
-    with open(memo_path, "w") as f:
-        json.dump(third_guess_memo, f)
+    # with open(memo_path, "r") as f:
+    #     third_guess_memo = json.load(f)
+    #     third_guess_memo[memo_key] = best_w3
+    # with open(memo_path, "w") as f:
+    #     json.dump(third_guess_memo, f)
 
     return best_w3
 
