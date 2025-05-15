@@ -18,7 +18,7 @@ at each level of the search:
 Two pruning steps make this feasible:
 
 1. Only consider the top 10 second guesses with the highest clue entropy.
-2. Prune possible answers to the top 2% more likely answers after the second guess.
+2. Prune possible answers to the top 2% most likely answers after the second guess.
 
 """
 
