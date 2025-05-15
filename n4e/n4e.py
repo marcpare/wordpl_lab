@@ -1,11 +1,28 @@
-import os
-import json
-import random
-import math
-from math import exp
+"""
+
+Compute optimal second guess strategy for WORDPL by exhaustive search.
+
+Exhaustive search is trickier in WORDPL than traditional wordle because it is possible
+for any clue to be given at any turn. Therefore every possible clue must be considered
+at each level of the search:
+
+```
+    for every possible first clue:
+        for every possible second guess:
+            for every possible second clue:
+                for every possible third guess:
+                    for every possible third clue:
+                        compute the expected number of wins
+```
+
+Two pruning steps make this feasible:
+
+1. Only consider the top 10 second guesses with the highest clue entropy.
+2. Prune possible answers to the top 2% more likely answers after the second guess.
+
+"""
+
 import numpy as np
-from tqdm import tqdm
-from collections import defaultdict
 from numba import njit, prange
 
 from lib import clues, word_lists
