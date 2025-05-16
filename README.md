@@ -111,7 +111,7 @@ for every possible first clue:                                   243 possible cl
 
 We prune the search over possible answers for an optimal final guess by computing the likelihood of each possible answer given the first two clues and then use only the top 2% of these possible answers for the subsequent evaluation for the optimal third guess. Or, in other words, we only evaluate the best possible third guess word against the most likely 2% of answers that it could be after two guesses.
 
-It is interesting that this can be pared down so much for high $\epsilon$ values, as there is not that much certainty about the correct answer after two guesses:
+It is interesting that this can be pared down so much for high ε values, as there is not that much certainty about the correct answer after two guesses:
 
 [cumulative probability plots]
 
@@ -129,5 +129,5 @@ For the 50th percentile game, a four-guess strategy is also used.
 
 Finally, for the 5th percentile game, a three-guess strategy is used. In traditional WORDL, about 50% of games can be won by three guesses. This percentage is too low for the 50th and 95th percentile versions of WORDPL, but it is more than high enough for the 5th percentile version. The additional accuracy gained from a fourth guess is offset by a reduced clue accuracy from smaller $\epsilon$.
 
-Also interesting to note, about 1% more wins are achieved by allocating a high $\epsilon$ to the first guess of a three-guess strategy, with the optimal distribution being about 2:1.
+Also interesting to note, about 1% more wins are achieved by allocating a high ε to the first guess of a three-guess strategy, with the optimal distribution being about 2:1.
 
