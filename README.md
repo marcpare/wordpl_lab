@@ -79,7 +79,7 @@ The number of words considered for a second guess can be greatly reduced using a
 
 ```
 for every possible first clue:                                   243 possible clues
-    for every possible second guess:                             **12,972 valid words to guess from**  <---
+    for every possible second guess:                     --->    12,972 valid words to guess from
         for every possible second clue:                          243
             for every possible third guess:                      12,972
                 for every possible third clue:                   243
@@ -106,7 +106,7 @@ for every possible first clue:                                   243 possible cl
         for every possible second clue:                          243
             for every possible third guess:                      12,972
                 for every possible third clue:                   243
-                    compute the expected number of wins.         **2,315 possible answer words**    <---
+                    compute the expected number of wins.  --->   2,315 possible answer words**    
 ```
 
 We prune the search over possible answers for an optimal final guess by computing the likelihood of each possible answer given the first two clues and then use only the top 2% of these possible answers for the subsequent evaluation for the optimal third guess. Or, in other words, we only evaluate the best possible third guess word against the most likely 2% of answers that it could be after two guesses.
