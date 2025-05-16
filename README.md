@@ -52,7 +52,7 @@ $$P(\text{particular incorrect clue character}) = \frac{1}{2 + \exp\left(\frac{\
 
 From here, we want to calculate the probability of being given a particular sequence of five clue characters `nc` for a given guess `w` and answer `a`. We start by computing the truthful clue (`c`) for `a` given `w`. Then, we count the number of characters different between `nc` and `c`, `k`. This count is the number of characters that would have to randomly be incorrect for this clue to be given. The overall probability for noisy clue `nc` then, is:
 
-$$P(nc | w, a) = P(correct clue character)^k * (P(particular incorrect clue character)^(5-k))
+$$P(\text{nc} \mid w, a) = \left[ P(\text{correct clue character}) \right]^k \times \left[ P(\text{particular incorrect clue character}) \right]^{(5 - k)}$$
 
 This is everything we need to compute the expected number of wins after a sequence of guesses. Here is the actual implementation of computing a best fourth and final guess after an initial sequence of three guesses:
 
