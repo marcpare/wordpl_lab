@@ -67,7 +67,7 @@ Breaking it down: the implementation precomputes the probabilities and clues to 
 
 `cwa[word][answer]` is the clue given for `answer` if `word` is guessed
 
-So, `pd[nc1][cwa[w1][a]]` is the probability of being given noisy clue `nc1` if word `w1` is guessed and the actual answer is `a` ($$P(nc | w , a)$$)
+So, `pd[nc1][cwa[w1][a]]` is $$P(nc | w , a)$$, the probability of being given noisy clue `nc1` if word `w1` is guessed and the actual answer is `a`.
 
 For a sequence of multiple guesses, the probabilities multiply together into the final probability. By running this over all possible answers (`for a in answers`), we can find the answer which is the most likely to be correct as well as the fraction of all possible WORDPL games in which this guess wins the game.
 
