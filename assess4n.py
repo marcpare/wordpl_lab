@@ -20,15 +20,15 @@ from numba import njit, prange
 # salet [12.3, 12.3, 12.3]
 # (2317, 0.5079844626672422, (0.4876278363926947, 0.5283280329253488))
 
-epsilon1 = 12.3
-epsilon2 = 12.3
-epsilon3 = 12.3
+epsilon1 = 24.0
+epsilon2 = 24.0
+epsilon3 = 24.0
 
 
 ws1 = "salet"
 
 strategy = []
-with open("numba_test/n4e_salet.txt", "r") as f:
+with open("n4e/n4e_salet_27.txt", "r") as f:
     for line in f:
         idx, w2 = line.split()
         strategy.append(int(w2))
