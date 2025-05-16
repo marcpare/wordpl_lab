@@ -38,17 +38,17 @@ Say you have a sequence of word guesses (`w1`, `w2`, `w3`) and resulting noisy c
 
 First, you need the probability of being a given noisy clue `nc` for an answer `a` with guess `w`. The clues are computed on a character-by-character basis, with a correct clue character being given with probability
 
-$$P(correct clue character) = 1 - 2/(2+e^(\epsilon/5))$$
+$$P(\text{correct clue character}) = 1 - \frac{2}{2 + \exp\left(\frac{\epsilon}{5}\right)}$$
 
 and an incorrect clue character:
 
-$$P(incorrect clue character) = 2.0 / (2.0 + exp(\epsilon / 5.0))$$
+$$P(\text{incorrect clue character}) = \frac{2}{2 + \exp\left(\frac{\epsilon}{5}\right)}$$
 
 Where $\epsilon$ is the parameter that controls how noisy the clues are.
 
 For this calculation, we are interested in the probability of a _particular_ incorrect clue. Since there are two possibilities to choose from when a clue is wrong, we divide this probability by 2.
 
-$$P(particular incorrect clue character) = 1.0 / (2.0 + exp(epsilon / 5.0))$$
+$$P(\text{particular incorrect clue character}) = \frac{1}{2 + \exp\left(\frac{\epsilon}{5}\right)}$$
 
 From here, we want to calculate the probability of being given a particular sequence of five clue characters `nc` for a given guess `w` and answer `a`. We start by computing the truthful clue (`c`) for `a` given `w`. Then, we count the number of characters different between `nc` and `c`, `k`. This count is the number of characters that would have to randomly be incorrect for this clue to be given. The overall probability for noisy clue `nc` then, is:
 
