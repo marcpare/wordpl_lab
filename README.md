@@ -2,7 +2,7 @@
 WORDPL Solver
 =============
 
-This repository implements an exhaustive search solver for WORDPL -- a variant of WORDL that sometimes gives incorrectly clues.
+This repository implements an exhaustive search solver for WORDPL -- a variant of WORDL that sometimes gives incorrect clues.
 
 [What is WORDPL?](https://github.com/TedTed/wordpl?tab=readme-ov-file)
 
