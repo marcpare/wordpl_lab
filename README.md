@@ -121,7 +121,13 @@ However, in side by side testing with full searches vs pruned searches, the same
 Putting it all together
 =======================
 
-With a computationally feasible exhaustive search in hand, it is possible to compute very effective strategies for WORDPL.
+The solver described here is implemented in about a page of code:
+
+https://github.com/marcpare/wordpl_lab/blob/main/n4e/n4e.py
+
+With another page of library code for precomputing the `pd` and `cwa` arrays:
+
+https://github.com/marcpare/wordpl_lab/blob/main/lib/clues.py
 
 For the 95th percentile game, a four-guess strategy is used starting with the [optimal starting word from WORDL](https://sonorouschocolate.com/notes/index.php?title=The_best_strategies_for_Wordle) of `salet`.
 
