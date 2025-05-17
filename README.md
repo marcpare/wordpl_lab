@@ -120,7 +120,7 @@ The figures below show the changing likelihoods for all answers as guesses are m
 
 ![Screenshot 2025-05-16 at 5 28 51 PM](https://github.com/user-attachments/assets/b2a7b292-001e-410c-a33c-5c78aa826ed8)
 
-Note that the y-axis is a log plot -- the space of possible answers converges quickly, even at the relatively low epsilon of 12.0 in this example.
+Note that the y-axis is on a log scale -- the space of possible answers converges quickly, even at the relatively low epsilon of 12.0 in this example.
 
 Zooming to the most likely answers, we can see only a few dozen are likely after two guesses:
 
