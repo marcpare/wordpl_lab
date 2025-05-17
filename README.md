@@ -27,7 +27,7 @@ However, it is possible to greatly reduce the search space with the following tw
 Algorithm Details
 =================
 
-Currently, the solver uses a fixed number of guess (either three or four), trying to maximize the number of games that are won on the final guess.
+Currently, the solver uses a fixed number of guesses (either three or four), trying to maximize the number of games that are won on the final guess.
 
 Computing expected wins
 -----------------------
@@ -44,15 +44,15 @@ and an incorrect clue character:
 
 $$P(\text{incorrect clue character}) = \frac{2}{2 + \exp\left(\frac{\epsilon}{5}\right)}$$
 
-Where $\epsilon$ is the parameter that controls how noisy the clues are.
+where $\epsilon$ is the parameter that controls how noisy the clues are.
 
 For this calculation, we are interested in the probability of a _particular_ incorrect clue. Since there are two possibilities to choose from when a clue is wrong, we divide this probability by 2.
 
 $$P(\text{particular incorrect clue character}) = \frac{1}{2 + \exp\left(\frac{\epsilon}{5}\right)}$$
 
-From here, we want to calculate the probability of being given a particular sequence of five clue characters `nc` for a given guess `w` and answer `a`. We start by computing the truthful clue (`c`) for `a` given `w`. Then, we count the number of characters different between `nc` and `c`, `k`. This count is the number of characters that would have to randomly be incorrect for this clue to be given. The overall probability for noisy clue `nc` then, is:
+From here, we want to calculate the probability of being given a particular sequence of five clue characters `nc` for a given guess `w` and answer `a`. We start by computing the truthful clue `c` for `a` given `w`. Then, we count the number of characters different between `nc` and `c`, calling it `k`. This count is the number of characters that would have to randomly be incorrect for this clue to be given. The overall probability for noisy clue `nc` then, is:
 
-$$P(\text{nc} \mid w, a) = \left[ P(\text{correct clue character}) \right]^k \times \left[ P(\text{particular incorrect clue character}) \right]^{(5 - k)}$$
+$$P(\text{nc} \mid w, a) = \left[ P(\text{correct clue character}) \right]^(5 - k) \times \left[ P(\text{particular incorrect clue character}) \right]^{k}$$
 
 This is everything we need to compute the expected number of wins after a sequence of guesses. Here is the actual implementation of computing a best fourth and final guess after an initial sequence of three guesses:
 

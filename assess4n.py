@@ -20,9 +20,9 @@ from numba import njit, prange
 # salet [12.3, 12.3, 12.3]
 # (2317, 0.5079844626672422, (0.4876278363926947, 0.5283280329253488))
 
-epsilon1 = 24.0
-epsilon2 = 24.0
-epsilon3 = 24.0
+epsilon1 = 12.0
+epsilon2 = 12.0
+epsilon3 = 12.0
 
 
 ws1 = "salet"
@@ -141,6 +141,7 @@ if __name__ == "__main__":
         ws4 = word_lists.answers[w4]
 
         path = f"{ws1} -> {clues.clue_to_str(c1)} -> {ws2} -> {clues.clue_to_str(c2)} -> {ws3} -> {clues.clue_to_str(c3)} -> {ws4}"
+        print(w1, c1, w2, c2, w3, c3, w4)
 
         g = ws4
 
