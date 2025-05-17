@@ -116,12 +116,17 @@ for every possible first clue:                                   243 possible cl
 
 We prune the search over possible answers for an optimal final guess by computing the likelihood of each possible answer given the first two clues and then use only the top 2% of these possible answers for the subsequent evaluation for the optimal third guess. Or, in other words, we only evaluate the best possible third guess word against the most likely 2% of answers that it could be after two guesses.
 
-It is interesting that this can be pared down so much for high ε values, as there is not that much certainty about the correct answer after two guesses:
+The figures below show the changing likelihoods for all answers as guesses are made:
 
-[cumulative probability plots]
+![Screenshot 2025-05-16 at 5 28 51 PM](https://github.com/user-attachments/assets/b2a7b292-001e-410c-a33c-5c78aa826ed8)
 
-However, in side by side testing with full searches vs pruned searches, the same answer results in almost every case. 
+Note that the y-axis is a log plot -- the space of possible answers converges quickly, even at the relatively low epsilon of 12.0 in this example.
 
+Zooming to the most likely answers, we can see only a few dozen are likely after two guesses:
+
+![Screenshot 2025-05-16 at 5 29 05 PM](https://github.com/user-attachments/assets/d2b10671-246e-4859-9da5-75a402a0e8f1)
+
+While the 2% number for pruning looks good in spot checks, it was not exhaustively explored as optimal. It may be possible to gain a bit more accuracy by pruning less aggressively here.
 
 Putting it all together
 =======================
