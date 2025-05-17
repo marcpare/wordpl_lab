@@ -126,7 +126,7 @@ Zooming to the most likely answers, we can see only a few dozen are likely after
 
 ![Screenshot 2025-05-16 at 5 29 05 PM](https://github.com/user-attachments/assets/d2b10671-246e-4859-9da5-75a402a0e8f1)
 
-While the 2% number for pruning looks good in spot checks, it was not exhaustively explored as optimal. It may be possible to gain a bit more accuracy by pruning less aggressively here.
+While the 2% number for pruning looks good in spot checks, it was not exhaustively explored as optimal. It may be possible to gain accuracy by pruning less aggressively here.
 
 Putting it all together
 =======================
