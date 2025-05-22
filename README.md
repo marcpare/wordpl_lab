@@ -126,7 +126,8 @@ Note that the y-axis is on a log scale -- the space of possible answers converge
 
 Zooming to the most likely answers, we can see only a few dozen are likely after two guesses:
 
-![Screenshot 2025-05-22 at 9 18 30 AM](https://github.com/user-attachments/assets/92c81727-0aba-400d-b9b6-43cbcaf446ba)
+![Screenshot 2025-05-22 at 9 20 38 AM](https://github.com/user-attachments/assets/95e9aac1-1f81-4cf1-aecf-e8ec844d0663)
+
 
 Putting it all together
 =======================
