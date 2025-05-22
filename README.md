@@ -114,14 +114,14 @@ for every possible first clue:                    243 possible clues
 
 We prune the search over possible answers for an optimal final guess by computing the likelihood of each possible answer given the first two clues and then use only the top 2% of these possible answers for the subsequent evaluation for the optimal third guess. Or, in other words, we only evaluate the best possible third guess word against the most likely 2% of answers that it could be after two guesses.
 
-The figures below show the changing likelihoods for all answers as guesses are made:
+The figures below show the changing likelihoods for all answers as guesses are made for a game with ε=12:
 
 ![Screenshot 2025-05-22 at 9 17 27 AM](https://github.com/user-attachments/assets/fcd80ee4-40d5-48cd-940f-b1c5b489b586)
 
 
-Note that the y-axis is on a log scale -- the space of possible answers converges quickly, even at the relatively low epsilon of 12.0 in this example.
+Note that the y-axis is on a log scale -- the space of possible answers converges quickly, even with the significant amount of noise added at ε=12.
 
-Zooming to the most likely answers, we can see only a few dozen are likely after two guesses:
+Zooming to the most likely answers, we see the most likely possible answers is 10 times more likely than the next 25 possible answers, which themselves are 10 times more likely than the next most likely answers.
 
 ![Screenshot 2025-05-22 at 9 20 38 AM](https://github.com/user-attachments/assets/95e9aac1-1f81-4cf1-aecf-e8ec844d0663)
 
