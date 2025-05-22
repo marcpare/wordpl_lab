@@ -11,12 +11,12 @@ The basic idea of exhaustive search is simple: we play WORDPL with every possibl
 In traditional WORDL this is computationally feasible because each guess is guaranteed to eliminate a large number of possible answers. This is not the case in WORDPL because it is possible for any clue to be given at any turn, greatly increasing the search space. Without any pruning, the search space for four guesses is too large to exhaust on a typical PC:
 
 ```
-for every possible first clue:                                   243 possible clues
-    for every possible second guess:                             12,972 valid words to guess from
-        for every possible second clue:                          243
-            for every possible third guess:                      12,972
-                for every possible third clue:                   243
-                    compute the expected number of wins.         2,315 possible answer words
+for every possible first clue:                   243 possible clues
+  for every possible second guess:               12,972 valid words to guess from
+    for every possible second clue:              243
+      for every possible third guess:            12,972
+        for every possible third clue:           243
+          compute the expected number of wins.   2,315 possible answer words
 ```
 
 However, it is possible to greatly reduce the search space with the following two pruning steps:
@@ -36,7 +36,7 @@ At the core of the solver is a calculation for the number of expected wins after
 
 Say you have a sequence of word guesses (`w1`, `w2`, `w3`) and resulting noisy clues, which may or may not be accurate (`nc1`, `nc2`, `nc3`). What is the probability that a particular answer `a` is the correct answer?
 
-First, you need the probability of being a given noisy clue `nc` for an answer `a` with guess `w`. The clues are computed on a character-by-character basis, with a correct clue character being given with probability
+First, you need the probability of being given noisy clue `nc` for an answer `a` with guess `w`. The clues are computed on a character-by-character basis, with a correct clue character being given with probability
 
 $$P(\text{correct clue character}) = 1 - \frac{2}{2 + \exp\left(\frac{\epsilon}{5}\right)}$$
 
@@ -52,7 +52,7 @@ $$P(\text{particular incorrect clue character}) = \frac{1}{2 + \exp\left(\frac{\
 
 From here, we want to calculate the probability of being given a particular sequence of five clue characters `nc` for a given guess `w` and answer `a`. We start by computing the truthful clue `c` for `a` given `w`. Then, we count the number of characters different between `nc` and `c`, calling it `k`. This count is the number of characters that would have to randomly be incorrect for this clue to be given. The overall probability for noisy clue `nc` then, is:
 
-$$P(\text{nc} \mid w, a) = \left[ P(\text{correct clue character}) \right]^(5 - k) \times \left[ P(\text{particular incorrect clue character}) \right]^{k}$$
+$$P(\text{nc} \mid w, a) = \left[ P(\text{correct clue character}) \right]^{5 - k} \times \left[ P(\text{particular incorrect clue character}) \right]^{k}$$
 
 This is everything we need to compute the expected number of wins after a sequence of guesses. Here is the actual implementation of computing a best fourth and final guess after an initial sequence of three guesses:
 
