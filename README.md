@@ -119,15 +119,14 @@ We prune the search over possible answers for an optimal final guess by computin
 
 The figures below show the changing likelihoods for all answers as guesses are made:
 
-![Screenshot 2025-05-16 at 5 28 51 PM](https://github.com/user-attachments/assets/b2a7b292-001e-410c-a33c-5c78aa826ed8)
+![Screenshot 2025-05-22 at 9 17 27 AM](https://github.com/user-attachments/assets/fcd80ee4-40d5-48cd-940f-b1c5b489b586)
+
 
 Note that the y-axis is on a log scale -- the space of possible answers converges quickly, even at the relatively low epsilon of 12.0 in this example.
 
 Zooming to the most likely answers, we can see only a few dozen are likely after two guesses:
 
-![Screenshot 2025-05-16 at 5 29 05 PM](https://github.com/user-attachments/assets/d2b10671-246e-4859-9da5-75a402a0e8f1)
-
-While the 2% number for pruning looks good in spot checks, it was not exhaustively explored as optimal. It may be possible to gain accuracy by pruning less aggressively here.
+![Screenshot 2025-05-22 at 9 18 30 AM](https://github.com/user-attachments/assets/92c81727-0aba-400d-b9b6-43cbcaf446ba)
 
 Putting it all together
 =======================
