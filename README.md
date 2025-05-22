@@ -137,11 +137,19 @@ With another page of library code for precomputing the `pd` and `cwa` arrays:
 
 https://github.com/marcpare/wordpl_lab/blob/main/lib/clues.py
 
-For the 95th percentile game, a four-guess strategy is used starting with the [optimal starting word from WORDL](https://sonorouschocolate.com/notes/index.php?title=The_best_strategies_for_Wordle) of `salet`.
+For the 95th and 50th percentile games, a four-guess strategy is used starting with the [optimal starting word from WORDL](https://sonorouschocolate.com/notes/index.php?title=The_best_strategies_for_Wordle) of `salet`.
 
-For the 50th percentile game, a four-guess strategy is also used.
+The 5th percentile game differs, employing a three-guess strategy. In traditional WORDL, about 50% of games can be won by three guesses. This percentage is too low for the 50th and 95th percentile versions of WORDPL, but it is more than high enough for the 5th percentile version. The additional accuracy gained from a fourth guess is offset by a reduced clue accuracy from smaller $\epsilon$.
 
-Finally, for the 5th percentile game, a three-guess strategy is used. In traditional WORDL, about 50% of games can be won by three guesses. This percentage is too low for the 50th and 95th percentile versions of WORDPL, but it is more than high enough for the 5th percentile version. The additional accuracy gained from a fourth guess is offset by a reduced clue accuracy from smaller $\epsilon$.
+Because three-guess strategies are so quick to compute, it was possible to explore allocating ε differently across guesses. Interestingly this does make a difference with about 1% more wins achieved by allocating a high ε to the first guess of a three-guess strategy. The optimal distribution was found to be about 2:1.
 
-Also interesting to note, about 1% more wins are achieved by allocating a high ε to the first guess of a three-guess strategy, with the optimal distribution being about 2:1.
+
+What's Left?
+=======================
+
+Exhaustive searches are provably optimal (they try everything!), but this work hasn't been truly exhaustive in its search. The pruning parameters (top 10 highest entropy second guesses and top 2% possible answers) might have been too aggressive. Indeed, the example figure for entropy vs score appears to show an optimal guess outside the top 10 highest entropy candidates.
+
+This work also did not explore the optimal ε distribution across guesses. The preliminary investigation of ε distribution for the three-guess suggests there may be accuracy to be gained here.
+
+And what about something dramatically different? Could a strategy with many low ε guesses beat the three and four-guess strategies? Maybe!
 
