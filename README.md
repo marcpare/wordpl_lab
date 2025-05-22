@@ -151,5 +151,7 @@ Exhaustive searches are provably optimal (they try everything!), but this work h
 
 This work also did not explore the optimal ε distribution across guesses. The preliminary investigation of ε distribution for the three-guess suggests there may be accuracy to be gained here.
 
+Finally, only one starting word was studied for the four-guess strategy. It is possible that the best starting word for WORDPL is not the same as the best starting word for WORDL.
+
 And what about something dramatically different? Could a strategy with many low ε guesses beat the three and four-guess strategies? Maybe!
 
