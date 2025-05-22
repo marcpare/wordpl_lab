@@ -94,7 +94,8 @@ The ins and outs of the maximum entropy approach are explained by Dominik Fay at
 
 Why not just use the word that maximizes clue entropy? Well, like in traditional WORDL, sometimes a guess early on in the game makes it harder to win the game in future turns. A guess that maximizes clue entropy may give you the most information about the true answer after turn 2, but it may leave you without a good choice of word for a third guess to narrow the space even further, since you can't choose arbitrary sequences of characters, only the small subset of valid guesses. Here is an example comparison of clue entropy vs. expected wins for a sample game:
 
-![Screenshot 2025-05-16 at 5 14 16 PM](https://github.com/user-attachments/assets/8bff7482-e182-47da-a30e-b0ccf076a7a1)
+![Screenshot 2025-05-22 at 9 10 28 AM](https://github.com/user-attachments/assets/16f1f4de-b48d-447e-8616-a79f5ac3ae57)
+
 
 While the highest expected wins is a high entropy guess, it is not the highest entropy guess. 
 
