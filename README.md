@@ -1,14 +1,26 @@
-
 WORDPL Solver
 =============
 
-This repository implements an exhaustive search solver for WORDPL -- a variant of WORDL that sometimes gives incorrect clues.
+This repository implements an exhaustive search solver for WORDPL -- a variant of Wordle that sometimes gives incorrect clues.
 
 [What is WORDPL?](https://github.com/TedTed/wordpl?tab=readme-ov-file)
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Algorithm Details](#algorithm-details)
+  - [Computing expected wins](#computing-expected-wins)
+  - [Pruning second guess with clue entropy](#pruning-second-guess-with-clue-entropy)
+  - [Pruning possible answers](#pruning-possible-answers)
+- [Putting it all together](#putting-it-all-together)
+- [What's Left?](#whats-left)
+- [What does this have to tell us about differential privacy?](#what-does-this-have-to-tell-us-about-differential-privacy)
+
+## Overview
+
 The basic idea of exhaustive search is simple: we play WORDPL with every possible sequence of guesses and pick the one that wins the most times.
 
-In traditional WORDL this is computationally feasible because each guess is guaranteed to eliminate a large number of possible answers. This is not the case in WORDPL because it is possible for any clue to be given at any turn, greatly increasing the search space. Without any pruning, the search space for four guesses is too large to exhaust on a typical PC:
+In traditional Wordle this is computationally feasible because each guess is guaranteed to eliminate a large number of possible answers. This is not the case in WORDPL because it is possible for any clue to be given at any turn, greatly increasing the search space. Without any pruning, the search space for four guesses is too large to exhaust on a typical PC:
 
 ```
 for every possible first clue:                   243 possible clues
@@ -92,7 +104,7 @@ To do this, the clue entropy is computed for each possible second word guess and
 
 The ins and outs of the maximum entropy approach are explained by Dominik Fay at https://dominikfay.me/blog/2025/maxclueentropy/
 
-Why not just use the word that maximizes clue entropy? Well, like in traditional WORDL, sometimes a guess early on in the game makes it harder to win the game in future turns. A guess that maximizes clue entropy may give you the most information about the true answer after turn 2, but it may leave you without a good choice of word for a third guess to narrow the space even further, since you can't choose arbitrary sequences of characters, only the subset that are valid guesses. Here is an example comparison of clue entropy vs. expected wins for a sample second guess:
+Why not just use the word that maximizes clue entropy? Well, like in traditional Wordle, sometimes a guess early on in the game makes it harder to win the game in future turns. A guess that maximizes clue entropy may give you the most information about the true answer after turn 2, but it may leave you without a good choice of word for a third guess to narrow the space even further, since you can't choose arbitrary sequences of characters, only the subset that are valid guesses. Here is an example comparison of clue entropy vs. expected wins for a sample second guess:
 
 ![Screenshot 2025-05-22 at 9 10 28 AM](https://github.com/user-attachments/assets/16f1f4de-b48d-447e-8616-a79f5ac3ae57)
 
@@ -137,9 +149,9 @@ With another page of library code for precomputing the `pd` and `cwa` arrays:
 
 https://github.com/marcpare/wordpl_lab/blob/main/lib/clues.py
 
-For the 95th and 50th percentile games, a four-guess strategy is used starting with the [optimal starting word from WORDL](https://sonorouschocolate.com/notes/index.php?title=The_best_strategies_for_Wordle) of `salet`.
+For the 95th and 50th percentile games, a four-guess strategy is used starting with the [optimal starting word from Wordle](https://sonorouschocolate.com/notes/index.php?title=The_best_strategies_for_Wordle) of `salet`.
 
-The 5th percentile game differs, employing a three-guess strategy. In traditional WORDL, about 50% of games can be won by three guesses. This percentage is too low for the 50th and 95th percentile versions of WORDPL, but it is more than high enough for the 5th percentile version. The additional accuracy gained from a fourth guess is offset by a reduced clue accuracy from smaller $\epsilon$.
+The 5th percentile game differs, employing a three-guess strategy. In traditional Wordle, about 50% of games can be won by three guesses. This percentage is too low for the 50th and 95th percentile versions of WORDPL, but it is more than high enough for the 5th percentile version. The additional accuracy gained from a fourth guess is offset by a reduced clue accuracy from smaller $\epsilon$.
 
 Because three-guess strategies are so quick to compute, it was possible to explore allocating ε differently across guesses. Interestingly this does make a difference with about 1% more wins achieved by allocating a high ε to the first guess of a three-guess strategy. The optimal distribution was found to be about 2:1.
 
@@ -151,7 +163,22 @@ Exhaustive searches are provably optimal (they try everything!), but this work h
 
 This work also did not explore the optimal ε distribution across guesses. The preliminary investigation of ε distribution for the three-guess suggests there may be accuracy to be gained here.
 
-Finally, only one starting word was studied for the four-guess strategy. It is possible that the best starting word for WORDPL is not the same as the best starting word for WORDL.
+Finally, only one starting word was studied for the four-guess strategy. It is possible that the best starting word for WORDPL is not the same as the best starting word for Wordle.
 
 And what about something dramatically different? Could a strategy with many low ε guesses beat the three and four-guess strategies? Maybe!
 
+
+What does this have to tell us about differential privacy?
+----------------------------------------------------------
+
+WORDPL was built as a demonstration of differential privacy by the team at [Oblivious](https://www.oblivious.com/)
+
+> Each game lets you adjust the epsilon parameter, allowing you to balance the trade-off between privacy and accuracy in an interactive environment.
+
+In its original form, the game was played once through, ranking results by ε required for a win. Damien (@TedTed) reframed this one-shot version of the game into one that more closely mimics real-life deployment of differential privacy by scoring results based on performance over many trials.
+
+This reframing does a good job to highlight one of the non-intuitive aspects of statistical privacy methods: data that feel noisy to human beings can still represent significant privacy risk. Consider the best strategy for winning WORDPL at least 5% of the time. This strategy requires ε = 15.6, which almost always provides an incorrect clue at each round, and often more than one. To a human being, this makes the game incredibly difficult. However, with optimal strategy, it is possible to reliably win 1 out of 20 times. 
+
+Imagine if we were instead talking about the US Census. And instead of guessing a word, we were guessing a person's name. Would regulators be happy that 1 out of 20 people could be identified reliably? Of the USA's 370 million people, that would affect 17 million. That's nearly the population of New York state!
+
+Of course, here we are talking about a toy example to demonstrate one aspect of statistical privacy methods (the trade-off between privacy and accuracy). In practice, algorithm design (basically, "asking the right question") allows useful outputs for data analysts at much lower ε values. Maybe one day there will be a game developed to illustrate this!
