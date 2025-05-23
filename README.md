@@ -169,7 +169,7 @@ And what about something dramatically different? Could a strategy with many low 
 
 
 What does this have to tell us about differential privacy?
-----------------------------------------------------------
+==========================================================
 
 WORDPL was built as a demonstration of differential privacy by the team at [Oblivious](https://www.oblivious.com/)
 
