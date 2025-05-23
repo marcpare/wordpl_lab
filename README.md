@@ -177,7 +177,7 @@ WORDPL was built as a demonstration of differential privacy by the team at [Obli
 
 In its original form, the game was played once through, ranking results by ε required for a win. Damien (@TedTed) reframed this one-shot version of the game into one that more closely mimics real-life deployment of differential privacy by scoring results based on performance over many trials.
 
-This reframing does a good job to highlight one of the non-intuitive aspects of statistical privacy methods: data that feel noisy to human beings can still represent significant privacy risk. Consider the best strategy for winning WORDPL at least 5% of the time. This strategy requires ε = 15.6, which almost always provides an incorrect clue at each round, and often more than one. To a human being, this makes the game incredibly difficult. However, with optimal strategy, it is possible to reliably win 1 out of 20 times. 
+This reframing does a good job to highlight one of the non-intuitive aspects of statistical privacy methods: data that feel noisy to human beings can still represent significant privacy risk. Consider the best strategy for winning WORDPL at least 5% of the time. This strategy requires ε = 15.6, which almost always provides an incorrect clue at each round, often more than one. To a human being, this makes the game incredibly difficult. However, with optimal strategy, it is possible to reliably win 1 out of 20 times. 
 
 Imagine if we were instead talking about the US Census. And instead of guessing a word, we were guessing a person's name. Would regulators be happy that 1 out of 20 people could be identified reliably? Of the USA's 370 million people, that would affect 17 million. That's nearly the population of New York state!
 
